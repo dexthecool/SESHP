@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Spotify Data Report Builder</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="app-shell">
+    <header class="hero panel">
+      <p class="eyebrow">Spotify Extended Streaming History</p>
+      <h1>Report Builder</h1>
+      <p class="hero-copy">
+        Drop your Spotify JSON files or one ZIP package, choose an output mode, then generate a downloadable report.
+      </p>
+    </header>
+
+    <section class="panel">
+      <h2>1. Upload Data</h2>
+      <div id="dropZone" class="drop-zone" tabindex="0" role="button" aria-label="Drop Spotify files here">
+        <p class="drop-title">Drag and drop <code>.zip</code> or <code>.json</code> files</p>
+        <p class="drop-subtitle">or use the file picker</p>
+        <div class="drop-actions">
+          <button id="chooseFilesBtn" type="button" class="btn btn-secondary">Choose Files</button>
+          <button id="clearFilesBtn" type="button" class="btn btn-ghost">Clear</button>
+        </div>
+        <input id="fileInput" type="file" accept=".zip,.json,application/zip,application/json" multiple hidden>
+      </div>
+      <p class="muted small">
+        Supports Spotify extended streaming history JSON files directly, or a ZIP containing those JSON files.
+      </p>
+      <div id="fileSummary" class="file-summary">No files selected.</div>
+      <ul id="fileList" class="file-list"></ul>
+    </section>
+
+    <section class="panel">
+      <h2>2. Choose Output Mode</h2>
+      <div class="mode-grid" role="radiogroup" aria-label="Output mode">
+        <label class="mode-card">
+          <input type="radio" name="outputMode" value="excel" checked>
+          <span class="mode-title">Full Excel Spreadsheet</span>
+          <span class="mode-desc">
+            Multi-sheet workbook with full song list, top 10 breakdowns, monthly and yearly listening totals.
+          </span>
+        </label>
+        <label class="mode-card">
+          <input type="radio" name="outputMode" value="pdf">
+          <span class="mode-title">Simplified PDF Snapshot</span>
+          <span class="mode-desc">
+            A cleaner shareable summary with top stats and graphs instead of full raw tables.
+          </span>
+        </label>
+      </div>
+    </section>
+
+    <section class="panel action-panel">
+      <h2>3. Generate Report</h2>
+      <button id="processBtn" type="button" class="btn btn-primary" disabled>Process and Download</button>
+      <p id="statusText" class="muted">Add files to enable processing.</p>
+    </section>
+
+    <section class="panel">
+      <h2>Status</h2>
+      <ol id="statusLog" class="status-log">
+        <li class="muted">Waiting for files.</li>
+      </ol>
+    </section>
+  </main>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
